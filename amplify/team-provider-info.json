@@ -1,0 +1,20 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-geocali-staging-110319-authRole",
+      "UnauthRoleArn": "arn:aws:iam::773326746359:role/amplify-geocali-staging-110319-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::773326746359:role/amplify-geocali-staging-110319-authRole",
+      "Region": "ap-northeast-1",
+      "DeploymentBucketName": "amplify-geocali-staging-110319-deployment",
+      "UnauthRoleName": "amplify-geocali-staging-110319-unauthRole",
+      "StackName": "amplify-geocali-staging-110319",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:773326746359:stack/amplify-geocali-staging-110319/a4eb86b0-5480-11ee-986d-0aa3b2e67511",
+      "AmplifyAppId": "d2mpunhs93fekh"
+    },
+    "categories": {
+      "auth": {
+        "GeoCali": {}
+      }
+    }
+  }
+}
