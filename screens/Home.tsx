@@ -9,11 +9,10 @@ interface HomeScreenProps {
 }
 
 const Home: React.FC<HomeScreenProps> = ({ navigation }) => {
-  const { user } = useContext(UserContext)
+  const { user, setIsLoading } = useContext(UserContext)
 
   const handleSignout = () => {
     signOut()
-    console.log(user)
     navigation.navigate("Login")
   }
 
@@ -23,7 +22,6 @@ const Home: React.FC<HomeScreenProps> = ({ navigation }) => {
       {user && <Text>Welcome {user.attributes.preferred_username}</Text>}
       <Button title="Login" onPress={() => navigation.navigate("Login")} />
       <Button title="Signup" onPress={() => navigation.navigate("Signup")} />
-      <Button title="Confirm" onPress={() => navigation.navigate("Confirm")} />
       <Button title="Signout" onPress={handleSignout} />
     </View>
   )

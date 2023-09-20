@@ -1,28 +1,35 @@
 import { View, TextInput, StyleSheet, Button } from "react-native"
 import React, { useState } from "react"
 import { confirmSignUp } from "../lib/auth/confirmSignup"
-import { StackNavigation } from "./Navigation"
+import { RootStackParamList, StackNavigation } from "./Navigation"
+import { RouteProp } from "@react-navigation/native"
 
 interface ConfirmSignupScreenProps {
+  route: RouteProp<RootStackParamList, "Confirm">
   navigation: StackNavigation
 }
 
-const ConfirmSignup: React.FC<ConfirmSignupScreenProps> = ({ navigation }) => {
+const ConfirmSignup: React.FC<ConfirmSignupScreenProps> = ({
+  route,
+  navigation,
+}) => {
   const [code, setCode] = useState("")
-  const [email, setEmail] = useState("")
+
+  const prevEmail = route.params.email
+
+  console.log(prevEmail)
 
   const onSubmit = () => {
-    confirmSignUp({ username: email, code: code })
+    confirmSignUp({ username: prevEmail, code: code })
     navigation.navigate("Home")
   }
 
   return (
     <View style={styles.container}>
       <TextInput
+        editable={false}
         style={styles.textInput}
-        placeholder="Email"
-        onChangeText={(newEmail) => setEmail(newEmail)}
-        defaultValue={email}
+        defaultValue={prevEmail}
       />
       <TextInput
         style={styles.textInput}

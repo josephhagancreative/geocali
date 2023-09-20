@@ -33,13 +33,9 @@ const SignupForm = () => {
       return
     }
     try {
-      // console.log(username, email, password)
       signUp({ username, password, email })
-      console.log("Signed Up - Please Verify")
-      navigation.navigate("Confirm")
-    } catch (error) {
-      console.warn(error)
-    }
+      navigation.navigate("Confirm", { email: email })
+    } catch (error) {}
   }
 
   return (

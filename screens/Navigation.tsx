@@ -6,6 +6,7 @@ import {
 import { UserContext } from "../context/Usercontext"
 import { useContext } from "react"
 import { View, ActivityIndicator, StyleSheet } from "react-native"
+import * as SplashScreen from "expo-splash-screen"
 
 import Home from "./Home"
 import Login from "./Login"
@@ -13,10 +14,17 @@ import Signup from "./Signup"
 import ConfirmSignup from "./ConfirmSignup"
 
 export type ScreenNames = ["Home", "Login", "Signup", "Confirm"]
-export type RootStackParamList = Record<ScreenNames[number], undefined>
+export type RootStackParamList = {
+  Home: undefined
+  Login: undefined
+  Signup: undefined
+  Confirm: { email: string }
+}
 export type StackNavigation = NativeStackNavigationProp<RootStackParamList>
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
+
+SplashScreen.preventAutoHideAsync()
 
 const Navigation = () => {
   const { user, isLoading } = useContext(UserContext)
@@ -27,6 +35,8 @@ const Navigation = () => {
         <ActivityIndicator />
       </View>
     )
+  } else {
+    SplashScreen.hideAsync()
   }
   return (
     <NavigationContainer>
