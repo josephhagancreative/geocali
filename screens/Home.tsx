@@ -1,8 +1,8 @@
-import { View, Text, StyleSheet, Button } from "react-native"
-import { useContext, useEffect } from "react"
+import { View, Text, StyleSheet } from "react-native"
+import { useContext } from "react"
 import { UserContext } from "../context/Usercontext"
 import { StackNavigation } from "./Navigation"
-import { signOut } from "../lib/auth/signout"
+import HomePageBar from "../components/UI/HomePageBar"
 
 interface HomeScreenProps {
   navigation: StackNavigation
@@ -11,18 +11,14 @@ interface HomeScreenProps {
 const Home: React.FC<HomeScreenProps> = ({ navigation }) => {
   const { user, setIsLoading } = useContext(UserContext)
 
-  const handleSignout = () => {
-    signOut()
-    navigation.navigate("Login")
-  }
-
   return (
     <View style={styles.container}>
       <Text>Welcome to geoCali!</Text>
+      <Text>This is the Homepage</Text>
       {user && <Text>Welcome {user.attributes.preferred_username}</Text>}
-      <Button title="Login" onPress={() => navigation.navigate("Login")} />
-      <Button title="Signup" onPress={() => navigation.navigate("Signup")} />
-      <Button title="Signout" onPress={handleSignout} />
+      <View style={styles.homepageBarContainer}>
+        <HomePageBar />
+      </View>
     </View>
   )
 }
@@ -32,9 +28,14 @@ export default Home
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#eeeeee",
     alignItems: "center",
     justifyContent: "center",
     gap: 2,
+  },
+  homepageBarContainer: {
+    position: "absolute",
+    bottom: 0,
+    marginBottom: 50,
   },
 })

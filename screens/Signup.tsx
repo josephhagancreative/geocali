@@ -1,11 +1,10 @@
-import { View, Text, StyleSheet } from "react-native"
+import { View, StyleSheet } from "react-native"
 import React from "react"
 import SignupForm from "../components/signup/SignupForm"
 
 const Signup = () => {
   return (
     <View style={styles.container}>
-      <Text>Signup</Text>
       <SignupForm />
     </View>
   )

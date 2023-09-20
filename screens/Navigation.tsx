@@ -12,13 +12,27 @@ import Home from "./Home"
 import Login from "./Login"
 import Signup from "./Signup"
 import ConfirmSignup from "./ConfirmSignup"
+import Menu from "./Menu"
+import AddLocation from "./AddLocation"
+import UserProfile from "./UserProfile"
 
-export type ScreenNames = ["Home", "Login", "Signup", "Confirm"]
+export type ScreenNames = [
+  "Home",
+  "Login",
+  "Signup",
+  "Confirm",
+  "Menu",
+  "Add Location",
+  "UserProfile"
+]
 export type RootStackParamList = {
   Home: undefined
   Login: undefined
   Signup: undefined
   Confirm: { email: string }
+  Menu: undefined
+  AddLocation: undefined
+  UserProfile: undefined
 }
 export type StackNavigation = NativeStackNavigationProp<RootStackParamList>
 
@@ -43,10 +57,35 @@ const Navigation = () => {
       <Stack.Navigator
         initialRouteName="Home"
         screenOptions={{ headerBlurEffect: "light" }}>
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Signup" component={Signup} />
-        <Stack.Screen name="Confirm" component={ConfirmSignup} />
+        <Stack.Group>
+          <Stack.Screen
+            name="Home"
+            component={Home}
+            options={{ headerShown: false }}
+          />
+        </Stack.Group>
+        {user && (
+          <Stack.Group>
+            <Stack.Screen name="UserProfile" component={UserProfile} />
+          </Stack.Group>
+        )}
+        {!user && (
+          <Stack.Group screenOptions={{ headerTransparent: true }}>
+            <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="Signup" component={Signup} />
+            <Stack.Screen name="Confirm" component={ConfirmSignup} />
+          </Stack.Group>
+        )}
+
+        <Stack.Group screenOptions={{ presentation: "modal" }}>
+          <Stack.Screen name="Menu" component={Menu} />
+
+          <Stack.Screen
+            name="AddLocation"
+            options={{ title: "Add Location" }}
+            component={AddLocation}
+          />
+        </Stack.Group>
       </Stack.Navigator>
     </NavigationContainer>
   )

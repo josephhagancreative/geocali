@@ -69,7 +69,6 @@ const SignupForm = () => {
         defaultValue={confirmPassword}
       />
       <Button title="Signup" onPress={onSubmit} />
-      <Button title="Check" onPress={() => console.log("Checked")} />
     </View>
   )
 }

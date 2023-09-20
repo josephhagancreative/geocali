@@ -1,12 +1,27 @@
-import { View, Text, StyleSheet } from "react-native"
+import { View, Text, StyleSheet, Button } from "react-native"
 import React from "react"
 import LoginForm from "../components/login/LoginForm"
+import { StackNavigation } from "./Navigation"
 
-const Login = () => {
+interface LoginScreenProps {
+  navigation: StackNavigation
+}
+
+const Login: React.FC<LoginScreenProps> = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Text>Login</Text>
-      <LoginForm />
+      <View>
+        <View>
+          <LoginForm />
+        </View>
+        <View style={styles.signUpContainer}>
+          <Text>Don't have an account yet?</Text>
+          <Button
+            title="Sign Up"
+            onPress={() => navigation.navigate("Signup")}
+          />
+        </View>
+      </View>
     </View>
   )
 }
@@ -16,8 +31,14 @@ export default Login
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: "space-around",
+    alignItems: "stretch",
+    width: "100%",
     backgroundColor: "#fff",
-    alignItems: "center",
+  },
+  signUpContainer: {
     justifyContent: "center",
+    alignItems: "center",
+    marginTop: 40,
   },
 })
