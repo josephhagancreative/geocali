@@ -3,7 +3,7 @@ import React, { useState } from "react"
 import { validateInputs } from "../../lib/validation/signupValidation"
 import { useNavigation } from "@react-navigation/native"
 import { signUp } from "../../lib/auth/signup"
-import { RootStackParamList } from "../../App"
+import { RootStackParamList } from "../../screens/Navigation"
 import { NativeStackNavigationProp } from "@react-navigation/native-stack"
 
 type StackNavigator = NativeStackNavigationProp<RootStackParamList>

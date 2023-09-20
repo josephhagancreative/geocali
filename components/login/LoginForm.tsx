@@ -2,7 +2,7 @@ import { View, TextInput, Button, StyleSheet } from "react-native"
 import React, { useState } from "react"
 import { signIn } from "../../lib/auth/login"
 import { useNavigation } from "@react-navigation/native"
-import { RootStackParamList } from "../../App"
+import { RootStackParamList } from "../../screens/Navigation"
 import { NativeStackNavigationProp } from "@react-navigation/native-stack"
 
 type StackNavigator = NativeStackNavigationProp<RootStackParamList>
@@ -13,9 +13,8 @@ const LoginForm = () => {
 
   const navigation = useNavigation<StackNavigator>()
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     signIn({ username: email, password: password })
-    console.log("Logged In")
     navigation.navigate("Home")
   }
 

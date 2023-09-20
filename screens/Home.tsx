@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet, Button } from "react-native"
-import React from "react"
-import { StackNavigation } from "../App"
+import { useContext, useEffect } from "react"
+import { UserContext } from "../context/Usercontext"
+import { StackNavigation } from "./Navigation"
 import { signOut } from "../lib/auth/signout"
 
 interface HomeScreenProps {
@@ -8,14 +9,18 @@ interface HomeScreenProps {
 }
 
 const Home: React.FC<HomeScreenProps> = ({ navigation }) => {
+  const { user } = useContext(UserContext)
+
   const handleSignout = () => {
     signOut()
-    console.log("Signed Out")
+    console.log(user)
     navigation.navigate("Login")
   }
+
   return (
     <View style={styles.container}>
       <Text>Welcome to geoCali!</Text>
+      {user && <Text>Welcome {user.attributes.preferred_username}</Text>}
       <Button title="Login" onPress={() => navigation.navigate("Login")} />
       <Button title="Signup" onPress={() => navigation.navigate("Signup")} />
       <Button title="Confirm" onPress={() => navigation.navigate("Confirm")} />
@@ -32,5 +37,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+    gap: 2,
   },
 })

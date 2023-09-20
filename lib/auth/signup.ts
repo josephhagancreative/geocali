@@ -21,7 +21,6 @@ export async function signUp({ username, password, email }: SignUpParameters) {
         enabled: true,
       },
     })
-    console.log(user)
   } catch (error) {
     console.log("error signing up:", error)
   }

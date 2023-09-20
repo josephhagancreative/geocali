@@ -1,7 +1,7 @@
-import { View, Text, TextInput, StyleSheet, Button } from "react-native"
+import { View, TextInput, StyleSheet, Button } from "react-native"
 import React, { useState } from "react"
 import { confirmSignUp } from "../lib/auth/confirmSignup"
-import { StackNavigation } from "../App"
+import { StackNavigation } from "./Navigation"
 
 interface ConfirmSignupScreenProps {
   navigation: StackNavigation
