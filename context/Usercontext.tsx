@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react"
+import { createContext, useState, useEffect, useContext } from "react"
 import { Auth, Hub } from "aws-amplify"
 import { User } from "../global"
 
@@ -27,39 +27,44 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    Hub.listen("auth", ({ payload: { event, data } }) => {
-      switch (event) {
-        case "signOut":
-          setUser(null)
-          break
-        case "signIn":
-          setUser(data)
-          break
-        case "signUp":
-          break
-        case "confirmSignUp":
-          setUser(data)
-          break
-        case "autoSignIn":
-          setUser(data)
-          break
+    // Check the initial authentication state
+    const checkAuthState = async () => {
+      try {
+        const cognitoUser = await Auth.currentAuthenticatedUser()
+        setUser(cognitoUser)
+      } catch (e) {
+        console.warn(e)
       }
-    })
-    checkUser()
-  }, [])
-  const checkUser = async () => {
-    try {
-      const responseUser = await Auth.currentAuthenticatedUser()
-      setUser(responseUser)
-      setIsLoading(false)
-    } catch (error) {
-      setUser(null)
       setIsLoading(false)
     }
-  }
+    checkAuthState()
+
+    // Set up event listeners for sign-in and sign-out events
+    const listener = Hub.listen("auth", (data) => {
+      const { payload } = data
+      if (payload.event === "signIn") {
+        setUser(payload.data)
+      }
+      if (payload.event === "signOut") {
+        setUser(null)
+      }
+    })
+
+    // Clean up the event listener on component unmount
+    return () => listener()
+  }, [])
+
   return (
     <UserContext.Provider value={{ user, setUser, isLoading, setIsLoading }}>
       {children}
     </UserContext.Provider>
   )
+}
+
+export const useAuth = () => {
+  const context = useContext(UserContext)
+  if (context === undefined) {
+    throw new Error("useAuth must be used within an AuthProvider")
+  }
+  return context
 }

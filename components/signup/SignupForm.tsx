@@ -1,10 +1,18 @@
-import { View, Button, TextInput, StyleSheet, Alert } from "react-native"
+import {
+  View,
+  StyleSheet,
+  Alert,
+  ScrollView,
+  KeyboardAvoidingView,
+} from "react-native"
 import React, { useState } from "react"
 import { validateInputs } from "../../lib/validation/signupValidation"
 import { useNavigation } from "@react-navigation/native"
 import { signUp } from "../../lib/auth/signup"
 import { RootStackParamList } from "../../screens/Navigation"
 import { NativeStackNavigationProp } from "@react-navigation/native-stack"
+import ModernTextInput from "../UI/ModernTextInput"
+import Button from "../UI/Button"
 
 type StackNavigator = NativeStackNavigationProp<RootStackParamList>
 
@@ -39,37 +47,38 @@ const SignupForm = () => {
   }
 
   return (
-    <View style={styles.container}>
-      <TextInput
-        style={styles.textInput}
-        placeholder="Display Name"
+    <ScrollView contentContainerStyle={styles.container}>
+      <ModernTextInput
+        text="Display Name"
+        placeholder="your-display-name"
         onChangeText={(newUsername) => setUsername(newUsername)}
         defaultValue={username}
       />
-      <TextInput
-        style={styles.textInput}
-        placeholder="Email"
+      <ModernTextInput
+        text="Email"
+        placeholder="your-email@example.com"
         onChangeText={(newEmail) => setEmail(newEmail)}
         defaultValue={email}
       />
-      <TextInput
-        style={styles.textInput}
+      <ModernTextInput
+        text="Password"
         secureTextEntry={true}
-        placeholder="Password"
+        placeholder="your-password"
         onChangeText={(newPassword) => setPassword(newPassword)}
         defaultValue={password}
       />
-      <TextInput
-        style={styles.textInput}
+      <ModernTextInput
+        text="Confirm Password"
         secureTextEntry={true}
-        placeholder="Confirm Password"
+        placeholder="confirm-password"
         onChangeText={(newConfirmPassword) =>
           setConfirmPassword(newConfirmPassword)
         }
         defaultValue={confirmPassword}
       />
-      <Button title="Signup" onPress={onSubmit} />
-    </View>
+
+      <Button title="Sign Up" onPress={onSubmit} />
+    </ScrollView>
   )
 }
 
@@ -77,18 +86,10 @@ export default SignupForm
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     justifyContent: "center",
     alignItems: "center",
     gap: 5,
     width: "100%",
-  },
-  textInput: {
-    width: "90%",
-    padding: 10,
-    borderColor: "black",
-    borderWidth: 2,
-    borderRadius: 8,
-    fontSize: 16,
   },
 })

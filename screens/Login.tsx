@@ -1,5 +1,11 @@
-import { View, Text, StyleSheet, Button } from "react-native"
-import React from "react"
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  KeyboardAvoidingView,
+  Platform,
+} from "react-native"
 import LoginForm from "../components/login/LoginForm"
 import { StackNavigation } from "./Navigation"
 
@@ -9,20 +15,27 @@ interface LoginScreenProps {
 
 const Login: React.FC<LoginScreenProps> = ({ navigation }) => {
   return (
-    <View style={styles.container}>
-      <View>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={styles.container}>
+      <ScrollView
+        contentContainerStyle={styles.scrollContainer}
+        showsVerticalScrollIndicator={false}>
         <View>
-          <LoginForm />
+          <View>
+            <LoginForm />
+          </View>
+          <View style={styles.signUpContainer}>
+            <Text style={styles.descText}>Don't have an account yet?</Text>
+            <Text
+              onPress={() => navigation.navigate("Signup")}
+              style={styles.signupText}>
+              Sign Up
+            </Text>
+          </View>
         </View>
-        <View style={styles.signUpContainer}>
-          <Text>Don't have an account yet?</Text>
-          <Button
-            title="Sign Up"
-            onPress={() => navigation.navigate("Signup")}
-          />
-        </View>
-      </View>
-    </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
   )
 }
 
@@ -33,12 +46,27 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "space-around",
     alignItems: "stretch",
+    padding: 30,
     width: "100%",
-    backgroundColor: "#fff",
+    backgroundColor: "#eee",
+  },
+  scrollContainer: {
+    flexGrow: 1,
+    paddingVertical: 200,
   },
   signUpContainer: {
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "flex-start",
     marginTop: 40,
+  },
+  descText: {
+    fontFamily: "Montserrat-Regular",
+    textAlign: "left",
+  },
+  signupText: {
+    fontFamily: "Montserrat-Bold",
+    textAlign: "left",
+    fontSize: 16,
+    marginTop: 5,
   },
 })

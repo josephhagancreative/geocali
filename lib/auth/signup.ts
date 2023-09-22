@@ -7,7 +7,6 @@ type SignUpParameters = {
 }
 
 export async function signUp({ username, password, email }: SignUpParameters) {
-  console.log(username, password, email)
   try {
     const { user } = await Auth.signUp({
       username: email,
@@ -22,6 +21,6 @@ export async function signUp({ username, password, email }: SignUpParameters) {
       },
     })
   } catch (error) {
-    console.log("error signing up:", error)
+    console.warn("error signing up:", error)
   }
 }

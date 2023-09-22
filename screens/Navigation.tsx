@@ -3,10 +3,8 @@ import {
   NativeStackNavigationProp,
   createNativeStackNavigator,
 } from "@react-navigation/native-stack"
-import { UserContext } from "../context/Usercontext"
-import { useContext } from "react"
-import { View, ActivityIndicator, StyleSheet } from "react-native"
-import * as SplashScreen from "expo-splash-screen"
+import { useAuth } from "../context/Usercontext"
+import { View, StyleSheet, ActivityIndicator } from "react-native"
 
 import Home from "./Home"
 import Login from "./Login"
@@ -38,10 +36,8 @@ export type StackNavigation = NativeStackNavigationProp<RootStackParamList>
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
 
-SplashScreen.preventAutoHideAsync()
-
 const Navigation = () => {
-  const { user, isLoading } = useContext(UserContext)
+  const { user, isLoading } = useAuth()
 
   if (isLoading) {
     return (
@@ -49,9 +45,8 @@ const Navigation = () => {
         <ActivityIndicator />
       </View>
     )
-  } else {
-    SplashScreen.hideAsync()
   }
+
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -70,16 +65,26 @@ const Navigation = () => {
           </Stack.Group>
         )}
         {!user && (
-          <Stack.Group screenOptions={{ headerTransparent: true }}>
+          <Stack.Group
+            screenOptions={{
+              headerTransparent: true,
+              headerBlurEffect: "light",
+              headerTintColor: "#242124",
+              headerTitleStyle: {
+                fontFamily: "Montserrat-SemiBold",
+              },
+            }}>
             <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="Signup" component={Signup} />
             <Stack.Screen name="Confirm" component={ConfirmSignup} />
           </Stack.Group>
         )}
-
-        <Stack.Group screenOptions={{ presentation: "modal" }}>
+        <Stack.Group
+          screenOptions={{
+            presentation: "transparentModal",
+            headerShown: false,
+          }}>
           <Stack.Screen name="Menu" component={Menu} />
-
           <Stack.Screen
             name="AddLocation"
             options={{ title: "Add Location" }}
@@ -96,7 +101,7 @@ export default Navigation
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#eeeeee",
     alignItems: "center",
     justifyContent: "center",
     gap: 2,
