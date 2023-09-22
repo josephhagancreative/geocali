@@ -62,6 +62,15 @@ const Navigation = () => {
         {user && (
           <Stack.Group>
             <Stack.Screen name="UserProfile" component={UserProfile} />
+
+            <Stack.Screen
+              name="AddLocation"
+              options={{
+                title: "Add Location",
+                presentation: "modal",
+              }}
+              component={AddLocation}
+            />
           </Stack.Group>
         )}
         {!user && (
@@ -85,11 +94,6 @@ const Navigation = () => {
             headerShown: false,
           }}>
           <Stack.Screen name="Menu" component={Menu} />
-          <Stack.Screen
-            name="AddLocation"
-            options={{ title: "Add Location" }}
-            component={AddLocation}
-          />
         </Stack.Group>
       </Stack.Navigator>
     </NavigationContainer>
