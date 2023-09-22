@@ -16,18 +16,10 @@ interface HomeScreenProps {
   navigation: StackNavigation
 }
 
-// export type LocationObj = Location.LocationObject
-
 const Home: React.FC<HomeScreenProps> = ({ navigation }) => {
   const { user, isLoading } = useAuth()
 
-  const location = useLocation()
-
-  //  useEffect(() => {
-  //    if (!isLoading && user === null) {
-  //      navigation.navigate("Login")
-  //    }
-  //  }, [user, isLoading, navigation])
+  let location = useLocation()
 
   if (isLoading) {
     return (

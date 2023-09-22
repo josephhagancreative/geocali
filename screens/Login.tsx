@@ -20,7 +20,8 @@ const Login: React.FC<LoginScreenProps> = ({ navigation }) => {
       style={styles.container}>
       <ScrollView
         contentContainerStyle={styles.scrollContainer}
-        showsVerticalScrollIndicator={false}>
+        showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps={"handled"}>
         <View>
           <View>
             <LoginForm />

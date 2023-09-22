@@ -1,5 +1,5 @@
 import { Alert } from "react-native"
 
-export const loginAlert = (message: string) => {
-  Alert.alert("Please Log In", message)
+export const loginAlert = (title: string, message: string) => {
+  Alert.alert(title, message)
 }

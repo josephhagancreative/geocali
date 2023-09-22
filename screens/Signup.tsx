@@ -4,7 +4,6 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from "react-native"
-import React from "react"
 import SignupForm from "../components/signup/SignupForm"
 
 const Signup = () => {
@@ -14,7 +13,8 @@ const Signup = () => {
       style={styles.container}>
       <ScrollView
         contentContainerStyle={styles.scrollContainer}
-        showsVerticalScrollIndicator={false}>
+        showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps={"handled"}>
         <SignupForm />
       </ScrollView>
     </KeyboardAvoidingView>

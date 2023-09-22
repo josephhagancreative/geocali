@@ -1,11 +1,5 @@
-import {
-  View,
-  StyleSheet,
-  Alert,
-  ScrollView,
-  KeyboardAvoidingView,
-} from "react-native"
-import React, { useState } from "react"
+import { StyleSheet, Alert, ScrollView } from "react-native"
+import { useState } from "react"
 import { validateInputs } from "../../lib/validation/signupValidation"
 import { useNavigation } from "@react-navigation/native"
 import { signUp } from "../../lib/auth/signup"
@@ -13,6 +7,7 @@ import { RootStackParamList } from "../../screens/Navigation"
 import { NativeStackNavigationProp } from "@react-navigation/native-stack"
 import ModernTextInput from "../UI/ModernTextInput"
 import Button from "../UI/Button"
+import { createUser } from "../../lib/db/createUser"
 
 type StackNavigator = NativeStackNavigationProp<RootStackParamList>
 
@@ -42,6 +37,7 @@ const SignupForm = () => {
     }
     try {
       signUp({ username, password, email })
+      createUser(email, username)
       navigation.navigate("Confirm", { email: email })
     } catch (error) {}
   }

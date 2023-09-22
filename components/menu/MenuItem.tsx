@@ -1,5 +1,4 @@
 import { Pressable, Text, StyleSheet } from "react-native"
-import React from "react"
 
 type MenuItemProps = {
   name: string

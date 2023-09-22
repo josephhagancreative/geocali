@@ -1,5 +1,5 @@
 import { View, StyleSheet, Pressable } from "react-native"
-import React, { useContext } from "react"
+import { useContext } from "react"
 import { Ionicons } from "@expo/vector-icons"
 import HomePageBarButton from "./HomePageBarButton"
 import { useNavigation } from "@react-navigation/native"
@@ -7,12 +7,14 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack"
 import { RootStackParamList } from "../../screens/Navigation"
 import { UserContext } from "../../context/Usercontext"
 import { loginAlert } from "../../lib/validation/loginAlert"
+import { useAddFitspot } from "../../context/AddFitspotContext"
 
 const HomePageBar = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>()
 
   const { user, setIsLoading } = useContext(UserContext)
+  const { selectedFitspot } = useAddFitspot()
 
   return (
     <View style={styles.container}>
@@ -23,6 +25,7 @@ const HomePageBar = () => {
           user === null
             ? () =>
                 loginAlert(
+                  "Please Log In",
                   "You need to sign up or log in to add locations. Please log in from the profile icon or menu."
                 )
             : () => navigation.navigate("AddLocation")
@@ -35,12 +38,22 @@ const HomePageBar = () => {
           user === null
             ? () =>
                 loginAlert(
+                  "Please Log In",
                   "You need to sign up or log in to view favourited locations. Please log in from the profile icon or menu."
                 )
             : () => navigation.navigate("Home")
         }
       />
       <Pressable
+        onPress={
+          selectedFitspot
+            ? () => navigation.navigate("Search")
+            : () =>
+                loginAlert(
+                  "Select a Location",
+                  "Tap somewhere on the map to select a location, then you can search for local Fit Spots!"
+                )
+        }
         style={({ pressed }) => [
           styles.searchButton,
           pressed ? styles.searchButtonPressed : {},

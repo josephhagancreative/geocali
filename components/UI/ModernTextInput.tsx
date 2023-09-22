@@ -1,5 +1,4 @@
 import { View, Text, StyleSheet, TextInput } from "react-native"
-import React from "react"
 
 type ModernTextInputProps = {
   placeholder?: string

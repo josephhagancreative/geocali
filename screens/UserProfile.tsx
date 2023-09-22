@@ -1,9 +1,9 @@
 import { View, Text } from "react-native"
-import React, { useContext } from "react"
+import { useContext } from "react"
 import { UserContext } from "../context/Usercontext"
 
 const UserProfile = () => {
-  const { user, setIsLoading } = useContext(UserContext)
+  const { user } = useContext(UserContext)
 
   return (
     <View>

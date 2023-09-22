@@ -1,7 +1,5 @@
-import { View, Text, Pressable, StyleSheet } from "react-native"
-import React from "react"
+import { Text, Pressable, StyleSheet } from "react-native"
 import { GestureResponderEvent } from "react-native"
-import { LinearGradient } from "expo-linear-gradient"
 
 type ButtonProps = {
   title: string

@@ -1,5 +1,4 @@
 import {
-  View,
   StyleSheet,
   Text,
   ScrollView,
@@ -37,7 +36,8 @@ const ConfirmSignup: React.FC<ConfirmSignupScreenProps> = ({
       style={styles.container}>
       <ScrollView
         contentContainerStyle={styles.scrollContainer}
-        showsVerticalScrollIndicator={false}>
+        showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps={"handled"}>
         <ModernTextInput
           text="Email"
           defaultValue={prevEmail}
