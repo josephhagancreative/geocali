@@ -24,6 +24,7 @@ export default Button
 const styles = StyleSheet.create({
   buttonContainer: {
     width: "100%",
+    flexGrow: 1,
     backgroundColor: "#242124",
     borderRadius: 8,
     paddingVertical: 15,

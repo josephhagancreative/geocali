@@ -63,6 +63,15 @@ const Navigation = () => {
               component={Home}
               options={{ headerShown: false }}
             />
+            <Stack.Screen
+              name="Search"
+              options={{
+                title: "Search",
+                presentation: "transparentModal",
+                headerShown: false,
+              }}
+              component={Search}
+            />
           </Stack.Group>
           {user && (
             <Stack.Group>
@@ -71,18 +80,11 @@ const Navigation = () => {
               <Stack.Screen
                 name="AddLocation"
                 options={{
-                  title: "Add Location",
-                  presentation: "modal",
+                  title: "Add Fit Spot",
+                  presentation: "transparentModal",
+                  headerShown: false,
                 }}
                 component={AddLocation}
-              />
-              <Stack.Screen
-                name="Search"
-                options={{
-                  title: "Search",
-                  presentation: "modal",
-                }}
-                component={Search}
               />
             </Stack.Group>
           )}

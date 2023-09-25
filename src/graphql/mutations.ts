@@ -14,6 +14,9 @@ export const createReports = /* GraphQL */ `
       reportedReason
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       __typename
     }
   }
@@ -30,6 +33,9 @@ export const updateReports = /* GraphQL */ `
       reportedReason
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       __typename
     }
   }
@@ -46,6 +52,9 @@ export const deleteReports = /* GraphQL */ `
       reportedReason
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       __typename
     }
   }
@@ -61,6 +70,9 @@ export const createLikes = /* GraphQL */ `
       userID
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       __typename
     }
   }
@@ -76,6 +88,9 @@ export const updateLikes = /* GraphQL */ `
       userID
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       __typename
     }
   }
@@ -91,6 +106,9 @@ export const deleteLikes = /* GraphQL */ `
       userID
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       __typename
     }
   }
@@ -102,17 +120,18 @@ export const createFitspot = /* GraphQL */ `
   ) {
     createFitspot(input: $input, condition: $condition) {
       id
-      tile
-      coords {
-        lat
-        lng
-        __typename
-      }
+      title
+      geohash
       createdBy
-      images
       likes
+      images
+      facilities
+      coords
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       __typename
     }
   }
@@ -124,17 +143,18 @@ export const updateFitspot = /* GraphQL */ `
   ) {
     updateFitspot(input: $input, condition: $condition) {
       id
-      tile
-      coords {
-        lat
-        lng
-        __typename
-      }
+      title
+      geohash
       createdBy
-      images
       likes
+      images
+      facilities
+      coords
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       __typename
     }
   }
@@ -146,17 +166,18 @@ export const deleteFitspot = /* GraphQL */ `
   ) {
     deleteFitspot(input: $input, condition: $condition) {
       id
-      tile
-      coords {
-        lat
-        lng
-        __typename
-      }
+      title
+      geohash
       createdBy
-      images
       likes
+      images
+      facilities
+      coords
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       __typename
     }
   }
@@ -173,6 +194,9 @@ export const createAppUser = /* GraphQL */ `
       Favorites
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       __typename
     }
   }
@@ -189,6 +213,9 @@ export const updateAppUser = /* GraphQL */ `
       Favorites
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       __typename
     }
   }
@@ -205,6 +232,9 @@ export const deleteAppUser = /* GraphQL */ `
       Favorites
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       __typename
     }
   }

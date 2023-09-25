@@ -13,24 +13,30 @@ const HomePageBar = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>()
 
-  const { user, setIsLoading } = useContext(UserContext)
+  const { user } = useContext(UserContext)
   const { selectedFitspot } = useAddFitspot()
+
+  const handleAdd = () => {
+    if (user) {
+      if (selectedFitspot) {
+        navigation.navigate("AddLocation")
+      } else {
+        loginAlert(
+          "Select a Location",
+          "Tap somewhere on the map to select a location, then you can add a local Fit Spot!"
+        )
+      }
+    } else {
+      loginAlert(
+        "Please Log In",
+        "You need to sign up or log in to add locations. Please log in from the profile icon or menu."
+      )
+    }
+  }
 
   return (
     <View style={styles.container}>
-      <HomePageBarButton
-        icon={"add"}
-        size={30}
-        onPress={
-          user === null
-            ? () =>
-                loginAlert(
-                  "Please Log In",
-                  "You need to sign up or log in to add locations. Please log in from the profile icon or menu."
-                )
-            : () => navigation.navigate("AddLocation")
-        }
-      />
+      <HomePageBarButton icon={"add"} size={30} onPress={handleAdd} />
       <HomePageBarButton
         icon={"star"}
         size={24}

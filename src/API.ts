@@ -7,6 +7,7 @@ export type CreateReportsInput = {
   fitspotID: string,
   reportedByID: string,
   reportedReason: string,
+  _version?: number | null,
 };
 
 export type ModelReportsConditionInput = {
@@ -16,6 +17,7 @@ export type ModelReportsConditionInput = {
   and?: Array< ModelReportsConditionInput | null > | null,
   or?: Array< ModelReportsConditionInput | null > | null,
   not?: ModelReportsConditionInput | null,
+  _deleted?: ModelBooleanInput | null,
 };
 
 export type ModelStringInput = {
@@ -58,6 +60,13 @@ export type ModelSizeInput = {
   between?: Array< number | null > | null,
 };
 
+export type ModelBooleanInput = {
+  ne?: boolean | null,
+  eq?: boolean | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+};
+
 export type Reports = {
   __typename: "Reports",
   id: string,
@@ -66,6 +75,9 @@ export type Reports = {
   reportedReason: string,
   createdAt: string,
   updatedAt: string,
+  _version: number,
+  _deleted?: boolean | null,
+  _lastChangedAt: number,
 };
 
 export type UpdateReportsInput = {
@@ -73,16 +85,19 @@ export type UpdateReportsInput = {
   fitspotID?: string | null,
   reportedByID?: string | null,
   reportedReason?: string | null,
+  _version?: number | null,
 };
 
 export type DeleteReportsInput = {
   id: string,
+  _version?: number | null,
 };
 
 export type CreateLikesInput = {
   id?: string | null,
   fitspotID: string,
   userID: string,
+  _version?: number | null,
 };
 
 export type ModelLikesConditionInput = {
@@ -91,6 +106,7 @@ export type ModelLikesConditionInput = {
   and?: Array< ModelLikesConditionInput | null > | null,
   or?: Array< ModelLikesConditionInput | null > | null,
   not?: ModelLikesConditionInput | null,
+  _deleted?: ModelBooleanInput | null,
 };
 
 export type Likes = {
@@ -100,40 +116,47 @@ export type Likes = {
   userID: string,
   createdAt: string,
   updatedAt: string,
+  _version: number,
+  _deleted?: boolean | null,
+  _lastChangedAt: number,
 };
 
 export type UpdateLikesInput = {
   id: string,
   fitspotID?: string | null,
   userID?: string | null,
+  _version?: number | null,
 };
 
 export type DeleteLikesInput = {
   id: string,
+  _version?: number | null,
 };
 
 export type CreateFitspotInput = {
   id?: string | null,
-  tile: string,
-  coords: CoordInput,
+  title: string,
+  geohash: string,
   createdBy: string,
-  images?: Array< string > | null,
   likes: number,
-};
-
-export type CoordInput = {
-  lat: number,
-  lng: number,
+  images?: Array< string > | null,
+  facilities: Array< string >,
+  coords: Array< number >,
+  _version?: number | null,
 };
 
 export type ModelFitspotConditionInput = {
-  tile?: ModelStringInput | null,
+  title?: ModelStringInput | null,
+  geohash?: ModelStringInput | null,
   createdBy?: ModelStringInput | null,
-  images?: ModelStringInput | null,
   likes?: ModelIntInput | null,
+  images?: ModelStringInput | null,
+  facilities?: ModelStringInput | null,
+  coords?: ModelFloatInput | null,
   and?: Array< ModelFitspotConditionInput | null > | null,
   or?: Array< ModelFitspotConditionInput | null > | null,
   not?: ModelFitspotConditionInput | null,
+  _deleted?: ModelBooleanInput | null,
 };
 
 export type ModelIntInput = {
@@ -148,35 +171,50 @@ export type ModelIntInput = {
   attributeType?: ModelAttributeTypes | null,
 };
 
+export type ModelFloatInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+};
+
 export type Fitspot = {
   __typename: "Fitspot",
   id: string,
-  tile: string,
-  coords: Coord,
+  title: string,
+  geohash: string,
   createdBy: string,
-  images?: Array< string > | null,
   likes: number,
+  images?: Array< string > | null,
+  facilities: Array< string >,
+  coords: Array< number >,
   createdAt: string,
   updatedAt: string,
-};
-
-export type Coord = {
-  __typename: "Coord",
-  lat: number,
-  lng: number,
+  _version: number,
+  _deleted?: boolean | null,
+  _lastChangedAt: number,
 };
 
 export type UpdateFitspotInput = {
   id: string,
-  tile?: string | null,
-  coords?: CoordInput | null,
+  title?: string | null,
+  geohash?: string | null,
   createdBy?: string | null,
-  images?: Array< string > | null,
   likes?: number | null,
+  images?: Array< string > | null,
+  facilities?: Array< string > | null,
+  coords?: Array< number > | null,
+  _version?: number | null,
 };
 
 export type DeleteFitspotInput = {
   id: string,
+  _version?: number | null,
 };
 
 export type CreateAppUserInput = {
@@ -184,6 +222,7 @@ export type CreateAppUserInput = {
   email: string,
   username: string,
   Favorites?: Array< string > | null,
+  _version?: number | null,
 };
 
 export type ModelAppUserConditionInput = {
@@ -193,6 +232,7 @@ export type ModelAppUserConditionInput = {
   and?: Array< ModelAppUserConditionInput | null > | null,
   or?: Array< ModelAppUserConditionInput | null > | null,
   not?: ModelAppUserConditionInput | null,
+  _deleted?: ModelBooleanInput | null,
 };
 
 export type AppUser = {
@@ -203,6 +243,9 @@ export type AppUser = {
   Favorites?: Array< string > | null,
   createdAt: string,
   updatedAt: string,
+  _version: number,
+  _deleted?: boolean | null,
+  _lastChangedAt: number,
 };
 
 export type UpdateAppUserInput = {
@@ -210,10 +253,12 @@ export type UpdateAppUserInput = {
   email?: string | null,
   username?: string | null,
   Favorites?: Array< string > | null,
+  _version?: number | null,
 };
 
 export type DeleteAppUserInput = {
   id: string,
+  _version?: number | null,
 };
 
 export type ModelReportsFilterInput = {
@@ -224,6 +269,7 @@ export type ModelReportsFilterInput = {
   and?: Array< ModelReportsFilterInput | null > | null,
   or?: Array< ModelReportsFilterInput | null > | null,
   not?: ModelReportsFilterInput | null,
+  _deleted?: ModelBooleanInput | null,
 };
 
 export type ModelIDInput = {
@@ -246,6 +292,7 @@ export type ModelReportsConnection = {
   __typename: "ModelReportsConnection",
   items:  Array<Reports | null >,
   nextToken?: string | null,
+  startedAt?: number | null,
 };
 
 export type ModelLikesFilterInput = {
@@ -255,29 +302,36 @@ export type ModelLikesFilterInput = {
   and?: Array< ModelLikesFilterInput | null > | null,
   or?: Array< ModelLikesFilterInput | null > | null,
   not?: ModelLikesFilterInput | null,
+  _deleted?: ModelBooleanInput | null,
 };
 
 export type ModelLikesConnection = {
   __typename: "ModelLikesConnection",
   items:  Array<Likes | null >,
   nextToken?: string | null,
+  startedAt?: number | null,
 };
 
 export type ModelFitspotFilterInput = {
   id?: ModelIDInput | null,
-  tile?: ModelStringInput | null,
+  title?: ModelStringInput | null,
+  geohash?: ModelStringInput | null,
   createdBy?: ModelStringInput | null,
-  images?: ModelStringInput | null,
   likes?: ModelIntInput | null,
+  images?: ModelStringInput | null,
+  facilities?: ModelStringInput | null,
+  coords?: ModelFloatInput | null,
   and?: Array< ModelFitspotFilterInput | null > | null,
   or?: Array< ModelFitspotFilterInput | null > | null,
   not?: ModelFitspotFilterInput | null,
+  _deleted?: ModelBooleanInput | null,
 };
 
 export type ModelFitspotConnection = {
   __typename: "ModelFitspotConnection",
   items:  Array<Fitspot | null >,
   nextToken?: string | null,
+  startedAt?: number | null,
 };
 
 export type ModelAppUserFilterInput = {
@@ -288,12 +342,14 @@ export type ModelAppUserFilterInput = {
   and?: Array< ModelAppUserFilterInput | null > | null,
   or?: Array< ModelAppUserFilterInput | null > | null,
   not?: ModelAppUserFilterInput | null,
+  _deleted?: ModelBooleanInput | null,
 };
 
 export type ModelAppUserConnection = {
   __typename: "ModelAppUserConnection",
   items:  Array<AppUser | null >,
   nextToken?: string | null,
+  startedAt?: number | null,
 };
 
 export type ModelSubscriptionReportsFilterInput = {
@@ -303,6 +359,7 @@ export type ModelSubscriptionReportsFilterInput = {
   reportedReason?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionReportsFilterInput | null > | null,
   or?: Array< ModelSubscriptionReportsFilterInput | null > | null,
+  _deleted?: ModelBooleanInput | null,
 };
 
 export type ModelSubscriptionIDInput = {
@@ -341,19 +398,36 @@ export type ModelSubscriptionLikesFilterInput = {
   userID?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionLikesFilterInput | null > | null,
   or?: Array< ModelSubscriptionLikesFilterInput | null > | null,
+  _deleted?: ModelBooleanInput | null,
 };
 
 export type ModelSubscriptionFitspotFilterInput = {
   id?: ModelSubscriptionIDInput | null,
-  tile?: ModelSubscriptionStringInput | null,
+  title?: ModelSubscriptionStringInput | null,
+  geohash?: ModelSubscriptionStringInput | null,
   createdBy?: ModelSubscriptionStringInput | null,
-  images?: ModelSubscriptionStringInput | null,
   likes?: ModelSubscriptionIntInput | null,
+  images?: ModelSubscriptionStringInput | null,
+  facilities?: ModelSubscriptionStringInput | null,
+  coords?: ModelSubscriptionFloatInput | null,
   and?: Array< ModelSubscriptionFitspotFilterInput | null > | null,
   or?: Array< ModelSubscriptionFitspotFilterInput | null > | null,
+  _deleted?: ModelBooleanInput | null,
 };
 
 export type ModelSubscriptionIntInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  in?: Array< number | null > | null,
+  notIn?: Array< number | null > | null,
+};
+
+export type ModelSubscriptionFloatInput = {
   ne?: number | null,
   eq?: number | null,
   le?: number | null,
@@ -372,6 +446,7 @@ export type ModelSubscriptionAppUserFilterInput = {
   Favorites?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionAppUserFilterInput | null > | null,
   or?: Array< ModelSubscriptionAppUserFilterInput | null > | null,
+  _deleted?: ModelBooleanInput | null,
 };
 
 export type CreateReportsMutationVariables = {
@@ -388,6 +463,9 @@ export type CreateReportsMutation = {
     reportedReason: string,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -405,6 +483,9 @@ export type UpdateReportsMutation = {
     reportedReason: string,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -422,6 +503,9 @@ export type DeleteReportsMutation = {
     reportedReason: string,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -438,6 +522,9 @@ export type CreateLikesMutation = {
     userID: string,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -454,6 +541,9 @@ export type UpdateLikesMutation = {
     userID: string,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -470,6 +560,9 @@ export type DeleteLikesMutation = {
     userID: string,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -482,17 +575,18 @@ export type CreateFitspotMutation = {
   createFitspot?:  {
     __typename: "Fitspot",
     id: string,
-    tile: string,
-    coords:  {
-      __typename: "Coord",
-      lat: number,
-      lng: number,
-    },
+    title: string,
+    geohash: string,
     createdBy: string,
-    images?: Array< string > | null,
     likes: number,
+    images?: Array< string > | null,
+    facilities: Array< string >,
+    coords: Array< number >,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -505,17 +599,18 @@ export type UpdateFitspotMutation = {
   updateFitspot?:  {
     __typename: "Fitspot",
     id: string,
-    tile: string,
-    coords:  {
-      __typename: "Coord",
-      lat: number,
-      lng: number,
-    },
+    title: string,
+    geohash: string,
     createdBy: string,
-    images?: Array< string > | null,
     likes: number,
+    images?: Array< string > | null,
+    facilities: Array< string >,
+    coords: Array< number >,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -528,17 +623,18 @@ export type DeleteFitspotMutation = {
   deleteFitspot?:  {
     __typename: "Fitspot",
     id: string,
-    tile: string,
-    coords:  {
-      __typename: "Coord",
-      lat: number,
-      lng: number,
-    },
+    title: string,
+    geohash: string,
     createdBy: string,
-    images?: Array< string > | null,
     likes: number,
+    images?: Array< string > | null,
+    facilities: Array< string >,
+    coords: Array< number >,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -556,6 +652,9 @@ export type CreateAppUserMutation = {
     Favorites?: Array< string > | null,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -573,6 +672,9 @@ export type UpdateAppUserMutation = {
     Favorites?: Array< string > | null,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -590,6 +692,9 @@ export type DeleteAppUserMutation = {
     Favorites?: Array< string > | null,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -606,6 +711,9 @@ export type GetReportsQuery = {
     reportedReason: string,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -626,8 +734,39 @@ export type ListReportsQuery = {
       reportedReason: string,
       createdAt: string,
       updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null >,
     nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type SyncReportsQueryVariables = {
+  filter?: ModelReportsFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncReportsQuery = {
+  syncReports?:  {
+    __typename: "ModelReportsConnection",
+    items:  Array< {
+      __typename: "Reports",
+      id: string,
+      fitspotID: string,
+      reportedByID: string,
+      reportedReason: string,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null >,
+    nextToken?: string | null,
+    startedAt?: number | null,
   } | null,
 };
 
@@ -643,6 +782,9 @@ export type GetLikesQuery = {
     userID: string,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -662,8 +804,38 @@ export type ListLikesQuery = {
       userID: string,
       createdAt: string,
       updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null >,
     nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type SyncLikesQueryVariables = {
+  filter?: ModelLikesFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncLikesQuery = {
+  syncLikes?:  {
+    __typename: "ModelLikesConnection",
+    items:  Array< {
+      __typename: "Likes",
+      id: string,
+      fitspotID: string,
+      userID: string,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null >,
+    nextToken?: string | null,
+    startedAt?: number | null,
   } | null,
 };
 
@@ -675,17 +847,18 @@ export type GetFitspotQuery = {
   getFitspot?:  {
     __typename: "Fitspot",
     id: string,
-    tile: string,
-    coords:  {
-      __typename: "Coord",
-      lat: number,
-      lng: number,
-    },
+    title: string,
+    geohash: string,
     createdBy: string,
-    images?: Array< string > | null,
     likes: number,
+    images?: Array< string > | null,
+    facilities: Array< string >,
+    coords: Array< number >,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -701,14 +874,52 @@ export type ListFitspotsQuery = {
     items:  Array< {
       __typename: "Fitspot",
       id: string,
-      tile: string,
+      title: string,
+      geohash: string,
       createdBy: string,
-      images?: Array< string > | null,
       likes: number,
+      images?: Array< string > | null,
+      facilities: Array< string >,
+      coords: Array< number >,
       createdAt: string,
       updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null >,
     nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type SyncFitspotsQueryVariables = {
+  filter?: ModelFitspotFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncFitspotsQuery = {
+  syncFitspots?:  {
+    __typename: "ModelFitspotConnection",
+    items:  Array< {
+      __typename: "Fitspot",
+      id: string,
+      title: string,
+      geohash: string,
+      createdBy: string,
+      likes: number,
+      images?: Array< string > | null,
+      facilities: Array< string >,
+      coords: Array< number >,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null >,
+    nextToken?: string | null,
+    startedAt?: number | null,
   } | null,
 };
 
@@ -725,6 +936,9 @@ export type GetAppUserQuery = {
     Favorites?: Array< string > | null,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -745,8 +959,39 @@ export type ListAppUsersQuery = {
       Favorites?: Array< string > | null,
       createdAt: string,
       updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null >,
     nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type SyncAppUsersQueryVariables = {
+  filter?: ModelAppUserFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncAppUsersQuery = {
+  syncAppUsers?:  {
+    __typename: "ModelAppUserConnection",
+    items:  Array< {
+      __typename: "AppUser",
+      id: string,
+      email: string,
+      username: string,
+      Favorites?: Array< string > | null,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null >,
+    nextToken?: string | null,
+    startedAt?: number | null,
   } | null,
 };
 
@@ -763,6 +1008,9 @@ export type OnCreateReportsSubscription = {
     reportedReason: string,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -779,6 +1027,9 @@ export type OnUpdateReportsSubscription = {
     reportedReason: string,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -795,6 +1046,9 @@ export type OnDeleteReportsSubscription = {
     reportedReason: string,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -810,6 +1064,9 @@ export type OnCreateLikesSubscription = {
     userID: string,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -825,6 +1082,9 @@ export type OnUpdateLikesSubscription = {
     userID: string,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -840,6 +1100,9 @@ export type OnDeleteLikesSubscription = {
     userID: string,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -851,17 +1114,18 @@ export type OnCreateFitspotSubscription = {
   onCreateFitspot?:  {
     __typename: "Fitspot",
     id: string,
-    tile: string,
-    coords:  {
-      __typename: "Coord",
-      lat: number,
-      lng: number,
-    },
+    title: string,
+    geohash: string,
     createdBy: string,
-    images?: Array< string > | null,
     likes: number,
+    images?: Array< string > | null,
+    facilities: Array< string >,
+    coords: Array< number >,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -873,17 +1137,18 @@ export type OnUpdateFitspotSubscription = {
   onUpdateFitspot?:  {
     __typename: "Fitspot",
     id: string,
-    tile: string,
-    coords:  {
-      __typename: "Coord",
-      lat: number,
-      lng: number,
-    },
+    title: string,
+    geohash: string,
     createdBy: string,
-    images?: Array< string > | null,
     likes: number,
+    images?: Array< string > | null,
+    facilities: Array< string >,
+    coords: Array< number >,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -895,17 +1160,18 @@ export type OnDeleteFitspotSubscription = {
   onDeleteFitspot?:  {
     __typename: "Fitspot",
     id: string,
-    tile: string,
-    coords:  {
-      __typename: "Coord",
-      lat: number,
-      lng: number,
-    },
+    title: string,
+    geohash: string,
     createdBy: string,
-    images?: Array< string > | null,
     likes: number,
+    images?: Array< string > | null,
+    facilities: Array< string >,
+    coords: Array< number >,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -922,6 +1188,9 @@ export type OnCreateAppUserSubscription = {
     Favorites?: Array< string > | null,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -938,6 +1207,9 @@ export type OnUpdateAppUserSubscription = {
     Favorites?: Array< string > | null,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -954,5 +1226,8 @@ export type OnDeleteAppUserSubscription = {
     Favorites?: Array< string > | null,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };

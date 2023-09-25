@@ -1,0 +1,13 @@
+{
+  "resourceName": "Fitspot",
+  "policyUUID": "7e3dbdd1",
+  "bucketName": "fitspotstorage",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ"
+  ],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}

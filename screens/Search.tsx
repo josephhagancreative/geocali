@@ -1,11 +1,12 @@
-import { View, Text } from "react-native"
+import { Text } from "react-native"
 import { useAddFitspot } from "../context/AddFitspotContext"
+import ModalBackground from "../components/UI/ModalBackground"
 
 const Search = () => {
   const { selectedFitspot } = useAddFitspot()
 
   return (
-    <View>
+    <ModalBackground>
       {selectedFitspot && (
         <Text>
           Let's search for fit spots around {selectedFitspot.latitude} x{" "}
@@ -13,7 +14,7 @@ const Search = () => {
         </Text>
       )}
       <Text>Search</Text>
-    </View>
+    </ModalBackground>
   )
 }
 

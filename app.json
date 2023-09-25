@@ -23,6 +23,14 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "cameraPermission": "The geoCali app accesses your camera so you can add images to your fit spot uploads."
+        }
+      ]
+    ]
   }
 }

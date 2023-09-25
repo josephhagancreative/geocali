@@ -11,6 +11,9 @@ export const onCreateReports = /* GraphQL */ `
       reportedReason
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       __typename
     }
   }
@@ -24,6 +27,9 @@ export const onUpdateReports = /* GraphQL */ `
       reportedReason
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       __typename
     }
   }
@@ -37,6 +43,9 @@ export const onDeleteReports = /* GraphQL */ `
       reportedReason
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       __typename
     }
   }
@@ -49,6 +58,9 @@ export const onCreateLikes = /* GraphQL */ `
       userID
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       __typename
     }
   }
@@ -61,6 +73,9 @@ export const onUpdateLikes = /* GraphQL */ `
       userID
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       __typename
     }
   }
@@ -73,6 +88,9 @@ export const onDeleteLikes = /* GraphQL */ `
       userID
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       __typename
     }
   }
@@ -81,17 +99,18 @@ export const onCreateFitspot = /* GraphQL */ `
   subscription OnCreateFitspot($filter: ModelSubscriptionFitspotFilterInput) {
     onCreateFitspot(filter: $filter) {
       id
-      tile
-      coords {
-        lat
-        lng
-        __typename
-      }
+      title
+      geohash
       createdBy
-      images
       likes
+      images
+      facilities
+      coords
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       __typename
     }
   }
@@ -100,17 +119,18 @@ export const onUpdateFitspot = /* GraphQL */ `
   subscription OnUpdateFitspot($filter: ModelSubscriptionFitspotFilterInput) {
     onUpdateFitspot(filter: $filter) {
       id
-      tile
-      coords {
-        lat
-        lng
-        __typename
-      }
+      title
+      geohash
       createdBy
-      images
       likes
+      images
+      facilities
+      coords
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       __typename
     }
   }
@@ -119,17 +139,18 @@ export const onDeleteFitspot = /* GraphQL */ `
   subscription OnDeleteFitspot($filter: ModelSubscriptionFitspotFilterInput) {
     onDeleteFitspot(filter: $filter) {
       id
-      tile
-      coords {
-        lat
-        lng
-        __typename
-      }
+      title
+      geohash
       createdBy
-      images
       likes
+      images
+      facilities
+      coords
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       __typename
     }
   }
@@ -143,6 +164,9 @@ export const onCreateAppUser = /* GraphQL */ `
       Favorites
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       __typename
     }
   }
@@ -156,6 +180,9 @@ export const onUpdateAppUser = /* GraphQL */ `
       Favorites
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       __typename
     }
   }
@@ -169,6 +196,9 @@ export const onDeleteAppUser = /* GraphQL */ `
       Favorites
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       __typename
     }
   }
